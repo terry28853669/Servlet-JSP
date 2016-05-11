@@ -1,0 +1,21 @@
+package cc.openhome;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+
+/**
+ * Servlet implementation class HelloParam
+ */
+@WebServlet("/HelloParam.View")
+public class HelloParam extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public HelloParam() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+}

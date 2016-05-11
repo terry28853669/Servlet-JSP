@@ -1,0 +1,49 @@
+package cc.openhome;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+ * Servlet implementation class Session1
+ */
+@WebServlet("/Session1.View")
+public class Session1 extends HttpServlet {
+	public void service(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {
+		PrintWriter output;
+
+		String lang = req.getParameter("lang");
+
+		// create a session if one does not exist
+		// 需要使用 true 當作 getSession() 的參數
+		HttpSession session = req.getSession(true);
+
+		// add a value for user's choice to session
+		session.setAttribute("language", lang);
+
+		res.setContentType("text/html;charset=UTF-8");
+		output = res.getWriter();
+
+		StringBuffer buf = new StringBuffer();
+		buf.append("<html><head><title>\n");
+		buf.append("Recommendation\n");
+		buf.append("</title></head><body>\n");
+
+		buf.append("請按\"Recommended Books\"來顯示建議清單<br/>\n");
+		buf.append("<form method=\"POST\" "
+				+ "action=\"http://localhost:8080/servlet/Session2\">\n");
+		buf.append("<input type=\"submit\" value=\"Recommended Books\">\n");
+		buf.append("</form>\n");
+
+		buf.append("</body></html>\n");
+		output.println(buf.toString());
+		output.close();
+	}
+}
